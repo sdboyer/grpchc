@@ -29,9 +29,10 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Too many args, expected one address (host:port) for querying\n")
 		os.Exit(1)
 	}
+	addr = args[0]
 
 	ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
-	cc, err := grpc.DialContext(ctx, args, grpc.WithInsecure())
+	cc, err := grpc.DialContext(ctx, addr, grpc.WithInsecure())
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not connect to gRPC server: %s\n", err)
 		os.Exit(1)
